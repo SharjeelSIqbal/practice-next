@@ -5,10 +5,10 @@ const ArticleList = ({articles}) => {
   console.log(articles);
   return (
   <div className={articleStyles.grid}>
-    {/* {articles.map(article => (
+    {articles.map(article => (
       <ArticleItem key={article.id} article={article} />
       ))
-    } */}
+    }
   </div>
   )
 }
