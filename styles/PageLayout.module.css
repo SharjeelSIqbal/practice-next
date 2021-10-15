@@ -1,0 +1,13 @@
+.full {
+  width: 100%;
+}
+
+.half {
+  width: 50%;
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

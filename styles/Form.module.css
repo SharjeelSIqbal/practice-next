@@ -1,0 +1,32 @@
+.form {
+  margin: 3rem 0 0;
+}
+
+.plan {
+  width: 400px;
+  font-size: 1.5rem;
+  height: 3rem;
+  padding-left: 1rem;
+  border-radius: .2rem 0 0 .2rem;
+  border: gray 1px solid;
+}
+
+.submit {
+  height: 3rem;
+  width: 150px;
+  border-radius: 0 .2rem .2rem 0;
+  border: none;
+  background-color: paleturquoise;
+  color: white;
+}
+
+.submitDiv {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.label{
+  margin-top: 1rem;
+}
