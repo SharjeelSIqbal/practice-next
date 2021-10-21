@@ -1,7 +1,7 @@
-import {Component} from 'react'
+import {Component} from 'react';
 import { TextField, Button, Container, Typography, Grid, Paper} from '@mui/material';
-import Link from 'next/link'
-import ButtonExample from './ButtonExample';
+import Link from 'next/link';
+import { DatePicker} from '@material-ui/pickers';
 
 
 export default class PlanForm extends Component {
@@ -27,16 +27,14 @@ export default class PlanForm extends Component {
   render() {
     return (
       <Container align="center">
-
         <form onSubmit={this.onSubmit} action="submit">
-
          <Grid
         container
         justifyContent="center"
+        align="center"
         direction="column"
         style={{minHeight: '100vh', maxWidth: '80%'}}
-        spacing={1}
-        size="small"
+        spacing={3}
          >
           <Grid item>
             <Typography
@@ -49,7 +47,7 @@ export default class PlanForm extends Component {
             </ Typography>
           </Grid>
           <Grid item>
-            <TextField name="plan" onChange={this.onChange} fullWidth margin="normal" label="Plan name"/>
+            <TextField name="plan" size="large" onChange={this.onChange} fullWidth margin="normal" label="Plan name"/>
           </Grid>
           <Grid item>
             <TextField name="description" onChange={this.onChange} fullWidth margin="normal" label="Description" />
