@@ -1,21 +1,37 @@
 import {Component} from 'react';
 import { TextField, Button, Container, Typography, Grid, Paper} from '@mui/material';
 import Link from 'next/link';
-import { DatePicker} from '@material-ui/pickers';
+import { LocalizationProvider, TimePicker, StaticTimePicker } from '@mui/lab';
+import { DatePicker } from '@material-ui/pickers';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { MobileDatePicker,  DesktopDatePicker, DesktopTimePicker } from '@mui/lab';
 
+import DateFnsUtils from '@date-io/date-fns';
+// import { withStyles } from '@mui/material';
 
+// const useStyles = theme => ({
+//   root {
+
+//   }
+// })
 export default class PlanForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      isClicked: false
+      isClicked: false,
+      startDate: null,
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onStartDate = this.onStartDate.bind(this);
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value})
+  }
+  onStartDate(e){
+    console.log(e);
+    this.setState({startDate: e});
   }
 
   onSubmit(e){
@@ -33,7 +49,7 @@ export default class PlanForm extends Component {
         justifyContent="center"
         align="center"
         direction="column"
-        style={{minHeight: '100vh', maxWidth: '80%'}}
+        style={{minHeight: '100vh', maxWidth: '100%'}}
         spacing={3}
          >
           <Grid item>
@@ -47,12 +63,38 @@ export default class PlanForm extends Component {
             </ Typography>
           </Grid>
           <Grid item>
-            <TextField name="plan" size="large" onChange={this.onChange} fullWidth margin="normal" label="Plan name"/>
+            <TextField  name="plan" onChange={this.onChange} fullWidth label="Plan name"/>
           </Grid>
           <Grid item>
-            <TextField name="description" onChange={this.onChange} fullWidth margin="normal" label="Description" />
+            <TextField name="description" onChange={this.onChange} fullWidth label="Description" />
           </Grid>
-          <Grid item>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Grid item>
+              <DesktopDatePicker
+                fullWidth
+                label="Start date"
+                value={this.state.startDate}
+                minDate={this.state.startDate}
+                onChange={this.onStartDate}
+                renderInput={(params) => <TextField
+                  name="startDate"
+                  fullWidth {...params}
+                />}
+              />
+            </Grid>
+            <Grid item>
+              <DesktopTimePicker
+                label="Start time"
+                value={this.state.startDate}
+                minDate={this.state.startDate}
+                onChange={this.onStartDate}
+                renderInput={(params) => <TextField
+                  name="startDate"
+                  fullWidth {...params} />}
+              />
+            </Grid>
+          </LocalizationProvider>
+          <Grid item align="right">
             <Button variant="contained" type="submit" align="right" color="primary" size="large">
               Make a plan
             </Button>
