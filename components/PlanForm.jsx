@@ -1,61 +1,67 @@
-import React from 'react'
-import { TextField, Button, Container, Typography, Grid, Page} from '@mui/material';
+import {Component} from 'react'
+import { TextField, Button, Container, Typography, Grid, Paper} from '@mui/material';
 import Link from 'next/link'
-// import LocalizationProvider from '@mui/lab/LocalizationProvider';
-// import TimePicker from '@mui/lab/TimePicker'
-// import AdapterDateFns from '@mui/lab/AdapterDateFns'
-// import DateFns from '@date-io/date-fns';
+import ButtonExample from './ButtonExample';
 
-export default class PlanForm extends React.Component {
+
+export default class PlanForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-
+      isClicked: false
     }
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(e) {
-    console.log(e.target.name);
     this.setState({ [e.target.name]: e.target.value})
+  }
+
+  onSubmit(e){
+    e.preventDefault();
+    console.log(this.state);
+    console.log(e.target.reset());
   }
 
   render() {
     return (
+      <Container align="center">
 
-        <form action="submit">
-          <Grid
+        <form onSubmit={this.onSubmit} action="submit">
+
+         <Grid
         container
-        justify="center"
-        alignItems="center"
+        justifyContent="center"
         direction="column"
-        style={{ minHeight: '100vh'}}
-        spacing={2}
-      >
-        <Grid item>
-          <Typography
-            align="center"
-            color="textSecondary"
-            variant="h6"
-            component="h2"
-            >
-          Make a plan
-          </ Typography>
-        </Grid>
-        <Grid item>
-          <TextField name="plan" onChange={this.onChange} fullWidth margin="normal" label="Plan name"/>
-        </Grid>
-        <Grid item>
-          <TextField name="description" onChange={this.onChange} fullWidth margin="normal" label="Description" />
-        </Grid>
-        <Grid item>
-          <Button variant="contained" justify="right" color="primary" size="small">
+        style={{minHeight: '100vh', maxWidth: '80%'}}
+        spacing={1}
+        size="small"
+         >
+          <Grid item>
+            <Typography
+              align="center"
+              color="textSecondary"
+              variant="h6"
+              component="h2"
+              >
             Make a plan
-          </Button>
+            </ Typography>
+          </Grid>
+          <Grid item>
+            <TextField name="plan" onChange={this.onChange} fullWidth margin="normal" label="Plan name"/>
+          </Grid>
+          <Grid item>
+            <TextField name="description" onChange={this.onChange} fullWidth margin="normal" label="Description" />
+          </Grid>
+          <Grid item>
+            <Button variant="contained" type="submit" align="right" color="primary" size="large">
+              Make a plan
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
       </form>
-//comment
+      </Container>
 
     )
   }
