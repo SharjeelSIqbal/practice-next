@@ -30,14 +30,14 @@ export default class PlanForm extends Component {
     this.setState({ [e.target.name]: e.target.value})
   }
   onStartDate(e){
-    console.log(e);
     this.setState({startDate: e});
   }
 
   onSubmit(e){
     e.preventDefault();
-    console.log(this.state);
-    console.log(e.target.reset());
+    const {... state} = this.state;
+    e.target.reset();
+    this.setState({startDate: null});
   }
 
   render() {
@@ -63,10 +63,10 @@ export default class PlanForm extends Component {
             </ Typography>
           </Grid>
           <Grid item>
-            <TextField  name="plan" onChange={this.onChange} fullWidth label="Plan name"/>
+            <TextField  name="plan" onChange={this.onChange} fullWidth label="Plan name" required/>
           </Grid>
           <Grid item>
-            <TextField name="description" onChange={this.onChange} fullWidth label="Description" />
+            <TextField name="description" onChange={this.onChange} fullWidth label="Description" required/>
           </Grid>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Grid item>
