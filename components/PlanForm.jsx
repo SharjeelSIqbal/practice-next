@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { TextField, Button, Container, Typography, Grid } from '@mui/material';
 import Link from 'next/link';
-import { LocalizationProvider } from '@mui/lab';
+import { DateTimePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { DesktopDatePicker, DesktopTimePicker } from '@mui/lab';
 
@@ -11,6 +11,7 @@ export default class PlanForm extends Component {
     this.state = {
       isClicked: false,
       startDate: null,
+      endDate: null,
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -23,6 +24,10 @@ export default class PlanForm extends Component {
   onStartDate(e){
     this.setState({startDate: e});
   }
+  onEndDate(e){
+    this.setState({endDate: e})
+  }
+
 
   onSubmit(e){
     e.preventDefault();
@@ -61,28 +66,24 @@ export default class PlanForm extends Component {
           </Grid>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Grid item>
-              <DesktopDatePicker
-                fullWidth
-                label="Start date"
-                value={this.state.startDate}
-                minDate={this.state.startDate}
-                onChange={this.onStartDate}
-                renderInput={(params) => <TextField
-                  name="startDate"
-                  fullWidth {...params}
-                />}
-              />
+                <DateTimePicker
+                  label="Start"
+                  value={this.state.startDate}
+                  minDate={this.state.startDate}
+                  onChange={this.onStartDate}
+                  renderInput={(params) => <TextField
+                    fullWidth {...params} /> }
+                   />
             </Grid>
             <Grid item>
-              <DesktopTimePicker
-                label="Start time"
-                value={this.state.startDate}
-                minDate={this.state.startDate}
-                onChange={this.onStartDate}
-                renderInput={(params) => <TextField
-                  name="startDate"
-                  fullWidth {...params} />}
-              />
+              <DateTimePicker
+                  label="End"
+                  value={this.state.endDate}
+                  minDate={this.state.endDate}
+                  onChange={this.onEndDate}
+                  renderInput={(params) => <TextField
+                    fullWidth {...params} />}
+                />
             </Grid>
           </LocalizationProvider>
           <Grid item align="right">
