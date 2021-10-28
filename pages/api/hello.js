@@ -1,22 +1,8 @@
-// const { connectToDatabase } = require('../../utils/database');
-// const ObjectId = require('mongodb').ObjectId;
+import{ connectToDatabase } from '../../utils/database';
 
-// export default async function handler(req, res) {
-//   let { db } = await connectToDatabase();
-//   res.json()
+export default async function handler (req, res) {
+  const {db} = await connectToDatabase();
 
-
-// }
-import nextConnect from "next-connect";
-import middleware from "../../utils/database";
-
-
-const handler = nextConnect();
-handler.use(middleware);
-
-
-export default handler.get(async (req, res) => {
-  let doc = await req.db.collection('events')
-  console.log(doc);
+  let doc = await db.collection('plans').find({}).toArray();
   res.json(doc);
-})
+}
