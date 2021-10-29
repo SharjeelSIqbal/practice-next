@@ -3,7 +3,7 @@ import { TextField, Button, Container, Typography, Grid } from '@mui/material';
 import Link from 'next/link';
 import { DateTimePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { DesktopDatePicker, DesktopTimePicker } from '@mui/lab';
+import Image from 'next/dist/client/image';
 
 export default class PlanForm extends Component {
   constructor(props){
@@ -74,17 +74,15 @@ export default class PlanForm extends Component {
               >
             Make a plan
             </ Typography>
+            <Image width={100} height={100} layout="fixed" src="/images/calender.png"/>
           </Grid>
           <Grid item>
             <TextField  name="plan" onChange={this.onChange} fullWidth label="Plan name" required/>
           </Grid>
-          <Grid item>
-            <TextField name="description" onChange={this.onChange} fullWidth label="Description" required/>
-          </Grid>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Grid item>
                 <DateTimePicker
-                  label="Start data and time"
+                  label="Start date and time"
                   value={this.state.startDate}
                   minDate={this.state.startDate}
                   onChange={this.onStartDate}
@@ -104,6 +102,16 @@ export default class PlanForm extends Component {
                 />
             </Grid>
           </LocalizationProvider>
+          <Grid item>
+            <TextField
+              name="description"
+              onChange={this.onChange}
+              label="Description"
+              multiline
+              rows={5}
+              fullWidth
+              required />
+          </Grid>
           <Grid item align="right">
             <Button variant="contained" type="submit" align="right" color="primary" size="large">
               Make a plan
