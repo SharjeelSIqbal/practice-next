@@ -1,0 +1,39 @@
+
+  find is the same as where in SQL
+  sort can be used with the property name example .sort({name: 1} this sorts it in alphabetical order )
+  .sort({name: -1}) reverse alphabetical order
+  .limit will limit how many you want .limit(2)
+  .find with ({ name: "Kyle"}), { name: 1, age: 1} will return a selected field will give you those two and
+  the id if you don't want the id use {name: 1, age: 1, _id: 0}
+  if you wanted to get everything but one thing than you can use this to exclude it
+  .find({name: 0})
+  will exclude names but give you everything else.
+  ** Complex Queries **
+  .find({name: { $eq: "Sally"}})
+  will return the name with sally
+  or filter it out using .find({name: { $neq: "Sally"}})
+  to get greater than a certain number use {age: {$gt/gte/lt/lte : 12}}
+  if want or  {name {$in: ["Sally", "Kyle"] }}
+  will return sally or kyle
+  {name {$nin: ["Sally", "Kyle"] }} will return everything that isn't kyle or sally
+  to check if the property exists .find({age: $exists: true}) will return everything that exists with that property
+  .find({age: $exists: false}) will return things that don't have that property
+  ** More Complex Queries **
+  && queries
+  .find({ age: {$gte: 10, $lte: 40}}) will return within that range
+  .find({$and [{age: 26}, {name: 'Kyle}]}) will return all queries with the age and name
+  ||
+  .find({ $or [{age: {$lte: 25 }, name: 'Kyle'}]})
+  $not functions the same as !
+  have to use it in this way {age: $not {$lte: 20}}
+  $expr is expression debt is the first arguement balance is the second argument
+  .find({$expr, {gt: ["$debt", "balance"]}})
+  .update
+  .updateOne({})
+  $unset removes property completely
+  $push pushes a value of a property onto that array
+  $pull removes a value from that property from the array
+  .updateMany updates multiple rows
+  .replaceOne replaces on object
+  .deleteOne will delete an object
+  .deleteMany

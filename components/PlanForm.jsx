@@ -16,6 +16,8 @@ export default class PlanForm extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onStartDate = this.onStartDate.bind(this);
+    this.onEndDate = this.onEndDate.bind(this);
+    this.submitForm = this.submitForm.bind(this);
   }
 
   onChange(e) {
@@ -29,11 +31,26 @@ export default class PlanForm extends Component {
   }
 
 
+
   onSubmit(e){
     e.preventDefault();
-    const {... state} = this.state;
+    const {plan, description, startDate, endDate} = this.state;
+    const formData = {plan, description, startDate, endDate};
+    formData.userId = 1;
+    this.submitForm(formData)
     e.target.reset();
-    this.setState({startDate: null});
+
+  }
+
+  async submitForm(data){
+    console.log(data);
+    this.setState({ startDate: null, endDate: null });
+    await fetch('/api/plan', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .catch(err => console.error(err));
   }
 
   render() {
@@ -67,22 +84,23 @@ export default class PlanForm extends Component {
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Grid item>
                 <DateTimePicker
-                  label="Start"
+                  label="Start data and time"
                   value={this.state.startDate}
                   minDate={this.state.startDate}
                   onChange={this.onStartDate}
                   renderInput={(params) => <TextField
-                    fullWidth {...params} /> }
+                    fullWidth {...params} required /> }
                    />
             </Grid>
             <Grid item>
               <DateTimePicker
-                  label="End"
+                  label="End date and time"
                   value={this.state.endDate}
                   minDate={this.state.endDate}
                   onChange={this.onEndDate}
+                  required
                   renderInput={(params) => <TextField
-                    fullWidth {...params} />}
+                    fullWidth {...params} required />}
                 />
             </Grid>
           </LocalizationProvider>
